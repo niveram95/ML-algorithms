@@ -1,0 +1,10 @@
+function [vector,eigval]=myPCA(data,num_principal_components)
+s=size(data,2);
+train = data(:,1:s);
+ct=cov(train);
+[vec,val]=eig(ct);
+diagonal = diag(val);
+[diagonal,index] = sort(diagonal, 'descend');
+vec=vec(:,index);
+vector=vec(:,1:num_principal_components);
+eigval=diagonal(1:num_principal_components);
